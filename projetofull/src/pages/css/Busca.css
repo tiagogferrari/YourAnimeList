@@ -1,0 +1,6 @@
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Ajuste de acordo com a sua necessidade */
+}

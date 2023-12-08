@@ -1,0 +1,51 @@
+.navbar {
+    background-color: rgb(247, 247, 245);
+    border-bottom: 3px solid black;
+    
+}
+
+.me-2 {
+    border: 1px solid black;
+}
+
+.botaosearch {
+    color: white;
+    background-color: black;
+    border: 1px solid gray;
+    margin-right: 10px;
+}
+
+.botaosearch:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.botaologin{
+    color: white;
+    background-color: rgb(16, 178, 16);
+    border: 1px solid green;
+    margin-right: 10px;
+}
+
+.botaologin:hover {
+    color: black;
+    background-color: green;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.botaologout{
+    color: white;
+    background-color: red;
+    border: 1px solid rgb(150, 7, 7);
+    margin-right: 10px;
+}
+
+.botaologout:hover {
+    color: black;
+    background-color: rgb(150, 7, 7);
+    border: 1px solid black;
+    font-weight: bold;
+}
