@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize")
 const sequelize = require("../helpers/bd")
+const { Op } = require('sequelize');
 
 const animeModel = sequelize.define('Anime', {
     id: {
@@ -26,7 +27,13 @@ const animeModel = sequelize.define('Anime', {
 module.exports = {
     buscarUm: async function (title) {
         return await animeModel.findOne(
-            { where: { title: title } }
+            {
+                where: {
+                    title: {
+                        [Op.like]: '%' + title + '%'
+                    }
+                }
+            }
         )
     },
 
@@ -38,7 +45,7 @@ module.exports = {
             console.error("Erro ao buscar animes: ", error);
         }
     },
-    
+
 
     criar: async function (object) {
         return await animeModel.create({

@@ -6,12 +6,14 @@ const cors = require('cors');
 const axios = require('axios');
 const WebSocket = require('ws');
 const cache = require('express-redis-cache')
+const { xss } = require('express-xss-sanitizer')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
+app.use(xss());
 
 const cacheRedis = cache({
   host: 'localhost',
