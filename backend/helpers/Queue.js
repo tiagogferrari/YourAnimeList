@@ -1,66 +1,68 @@
-let connection;
-let channel;
+// let connection;
+// let channel;
 
-async function connect() {
-  if (connection && connection.isConnected()) {
-    return Promise.resolve(channel);
-  }
+// async function connect() {
+//   if (connection && connection.isConnected()) {
+//     return Promise.resolve(channel);
+//   }
 
-  try {
-    connection = await require('amqplib').connect("amqp://localhost");
-    process.once('SIGINT', () => { connection.close(); });
-    channel = await connection.createChannel();
-    return channel;
-  } catch (error) {
-    console.error('Erro ao conectar ao RabbitMQ:', error);
-    throw error;
-  }
-}
+//   try {
+//     connection = await require('amqplib').connect("amqp://localhost");
+//     process.once('SIGINT', () => { connection.close(); });
+//     channel = await connection.createChannel();
+//     return channel;
+//   } catch (error) {
+//     console.error('Erro ao conectar ao RabbitMQ:', error);
+//     throw error;
+//   }
+// }
 
-async function createQueue(queue) {
-  try {
-    const ch = await connect();
-    await ch.assertQueue(queue, { durable: true });
-    return ch;
-  } catch (error) {
-    console.error('Erro ao criar fila:', error);
-    throw error;
-  }
-}
+// async function createQueue(queue) {
+//   try {
+//     const ch = await connect();
+//     await ch.assertQueue(queue, { durable: true });
+//     return ch;
+//   } catch (error) {
+//     console.error('Erro ao criar fila:', error);
+//     throw error;
+//   }
+// }
 
-async function sendMessageToQueue(queue, message) {
-  try {
-    const ch = await createQueue(queue);
-    await ch.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
-    console.log(`Mensagem enviada para a fila ${queue}: ${JSON.stringify(message)}`);
-  } catch (error) {
-    console.error('Erro ao enviar mensagem para a fila:', error);
-  } finally {
-    // Certifique-se de fechar a conexão após o uso
-    if (connection) {
-      connection.close();
-    }
-  }
-}
+// async function sendMessageToQueue(queue, message) {
+//   try {
+//     const ch = await createQueue(queue);
+//     await ch.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
+//     console.log(`Mensagem enviada para a fila ${queue}: ${JSON.stringify(message)}`);
+//   } catch (error) {
+//     console.error('Erro ao enviar mensagem para a fila:', error);
+//   } finally {
+//     // Certifique-se de fechar a conexão após o uso
+//     if (connection) {
+//       connection.close();
+//     }
+//   }
+// }
 
-async function consume(queue, callback) {
-  try {
-    const ch = await createQueue(queue);
-    await ch.consume(queue, callback, { noAck: true });
-  } catch (error) {
-    console.error('Erro ao consumir mensagem da fila:', error);
-  } finally {
-    // Certifique-se de fechar a conexão após o uso
-    if (connection) {
-      connection.close();
-    }
-  }
-}
+// async function consume(queue, callback) {
+//   try {
+//     const ch = await createQueue(queue);
+//     await ch.consume(queue, callback, { noAck: true });
+//   } catch (error) {
+//     console.error('Erro ao consumir mensagem da fila:', error);
+//   } finally {
+//     // Certifique-se de fechar a conexão após o uso
+//     if (connection) {
+//       connection.close();
+//     }
+//   }
+// }
 
-module.exports = {
-  sendMessageToQueue,
-  consume
-};
+// module.exports = {
+//   sendMessageToQueue,
+//   consume
+// };
+
+//---
 
 /*
 let channel;

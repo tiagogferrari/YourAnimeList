@@ -5,7 +5,7 @@ const http = require('http');
 const cors = require('cors');
 const axios = require('axios');
 const WebSocket = require('ws');
-const cache = require('express-redis-cache')
+//const cache = require('express-redis-cache')
 const { xss } = require('express-xss-sanitizer')
 
 const app = express();
@@ -17,10 +17,10 @@ app.use(cors());
 //xss
 app.use(xss());
 
-const cacheRedis = cache({
-  host: 'localhost',
-  port: 6379
-});
+// const cacheRedis = cache({
+//   host: 'localhost',
+//   port: 6379
+// });
 
 app.use('/install', require('./controller/installBd'))
 app.use('/anime', require('./controller/AnimeApi'))
@@ -34,24 +34,24 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 let conns = [];
 
-wss.on('connection', (socket) => {
-  console.log(`Nova conexão... ${conns.length}`);
-  conns.push(socket);
+// wss.on('connection', (socket) => {
+//   console.log(`Nova conexão... ${conns.length}`);
+//   conns.push(socket);
 
-  socket.on('close', () => {
-  console.log(`Fechando conexão... ${conns.indexOf(socket)}`);
-  conns = conns.filter((s) => s !== socket);
-  });
+//   socket.on('close', () => {
+//   console.log(`Fechando conexão... ${conns.indexOf(socket)}`);
+//   conns = conns.filter((s) => s !== socket);
+//   });
 
-  socket.on('message', (msg) => {
-    console.log(`${conns.indexOf(socket)}: ${msg}`);
+//   socket.on('message', (msg) => {
+//     console.log(`${conns.indexOf(socket)}: ${msg}`);
 
-    conns.forEach((conn) => {
-      conn.send(`${conns.indexOf(socket)}: ${msg}`);
-    });
-  });
+//     conns.forEach((conn) => {
+//       conn.send(`${conns.indexOf(socket)}: ${msg}`);
+//     });
+//   });
 
-});
+// });
 
 try {
   server.listen(PORT, () => {

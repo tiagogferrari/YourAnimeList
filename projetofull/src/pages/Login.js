@@ -34,12 +34,12 @@ const Login = ({ onPageChange }) => {
                 onPageChange('home');
                 console.log('login concluido')
 
-                const socket = new WebSocket('ws://localhost:3000'); // Coloque o endereço correto do seu servidor WebSocket
-                socket.addEventListener('open', () => {
-                    const message = `${username} se logou!`; // Sua mensagem aqui
-                    socket.send(message);
-                    socket.close();
-                });
+                // const socket = new WebSocket('ws://localhost:3000'); // Coloque o endereço correto do seu servidor WebSocket
+                // socket.addEventListener('open', () => {
+                //     const message = `${username} se logou!`; // Sua mensagem aqui
+                //     socket.send(message);
+                //     socket.close();
+                // });
 
             })
             .catch((error) => {
